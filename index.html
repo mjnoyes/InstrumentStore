@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Instrument Store</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="store-app">
+  <div class="cart" v-on:click="empty">
+    <div>CART</div>
+    <div>Items: {{cart.length}}</div>
+  </div>
+  <div v-if="showPopUp" v-on:click="showPopUp=false">
+    <div class="popUp">
+      <div v-if="popUpItem.image"><img v-bind:src="popUpItem.image" /></div>
+      <div>{{popUpItem.name}}</div>
+      <div>{{popUpItem.type}}</div>
+      <div>${{popUpItem.price}}</div>
+      <div>{{popUpItem.brand}}</div>
+    </div>
+  </div>
+  <div class="form">
+    <p>Add Item:</p>
+    <input v-model="newName" type="text" placeholder="Name" /><br>
+    <input v-model="newPrice" type="text" placeholder="Price" /><br>
+    <input v-model="newType" type="text" placeholder="Type" /><br><br>
+    <p>Brand:</p>
+    <input v-model="newBrand" type="radio" name="brand" value="fender" />Fender
+    <input v-model="newBrand" type="radio" name="brand" value="yamaha" />Yamaha
+    <input v-model="newBrand" type="radio" name="brand" value="maton" />Maton<br><br>
+    <button v-on:click="newItem">Add Item</button><br><br>
+  </div>
+  <div v-for="(item,index) in items">
+
+    <div class="item" v-on:click="popUp(item)" v-bind:class="item.brand">
+      <div v-if="item.image"><img v-bind:src="item.image" /></div>
+      <div v-if="item.noImage"><img v-bind:src="noImage" /></div>
+      <div>{{item.name}}</div>
+      <div>${{item.price}}</div>
+    </div>
+    <button class="button" v-on:click="addToCart(item,index)">Add To Cart</button>
+  </div>
+  <br>
+
+</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
